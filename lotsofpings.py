@@ -29,14 +29,23 @@ async def start_pings():
             client.channel = channel.id
 
 
-
 client = commands.Bot(command_prefix='ping', case_insensitive=True)
 # initialize the database variables
-with open('db.json') as meow:
-    db = json.load(meow)
-    client.count = db["count"]
-    client.channel = db["channel"]
-    client.total_channels = db["total_channels"]
+try:
+    with open('db.json') as meow:
+        db = json.load(meow)
+except FileNotFoundError:  # create the db.json if it doesnt exist already
+    db = {
+        "count": 0,
+        "channel": None,
+        "total_channels": 0
+    }
+    with open('db.json', 'w+') as meow:
+        json.dump(db, meow)
+        meow.close()
+client.count = db["count"]
+client.channel = db["channel"]
+client.total_channels = db["total_channels"]
 client.pinging = False
 
 
