@@ -71,7 +71,7 @@ async def test():
     pass
 
 
-@tasks.loop(minutes=1)
+@tasks.loop(minutes=5)
 async def update_json():
     # update the db.json every 5 minutes
     # create a dictionary to put inside the db.json
