@@ -24,9 +24,10 @@ async def start_pings():
             client.count += 1
         else:  # reset the channel
             client.count = 0
+            client.total_channels += 1
             channel = await server.create_text_channel(str(client.total_channels))
             client.channel = channel.id
-            client.total_channels += 1
+
 
 
 client = commands.Bot(command_prefix='ping', case_insensitive=True)
