@@ -11,7 +11,10 @@ async def start_pings():
     server = client.get_guild(client.server)
     # if the channel in the db.json is null
     if client.channel is None:
-        channel = await server.create_text_channel(str(client.total_channels))
+        overwrites = {
+            server.default_role: discord.PermissionOverwrite(send_messages=False),
+        }
+        channel = await server.create_text_channel(str(client.total_channels), overwrites=overwrites)
         client.channel = channel.id
     # if there is a valid channel in the db.json
     else:
