@@ -21,15 +21,21 @@ async def start_pings():
         channel = client.get_channel(client.channel)
 
     while True:
-        # check if the bot has already sent 10000 pings (i added 50 as a buffer)
-        if client.count < 10050:
-            await channel.send("@everyone")
-            client.count += 1
-        else:  # reset the channel
-            client.count = 0
-            client.total_channels += 1
-            channel = await server.create_text_channel(str(client.total_channels))
-            client.channel = channel.id
+        try:
+            # check if the bot has already sent 10000 pings (i added 50 as a buffer)
+            if client.count < 10050:
+                await channel.send("@everyone")
+                client.count += 1
+            else:  # reset the channel
+                client.count = 0
+                client.total_channels += 1
+                overwrites = {
+                    server.default_role: discord.PermissionOverwrite(send_messages=False),
+                }
+                channel = await server.create_text_channel(str(client.total_channels), overwrites=overwrites)
+                client.channel = channel.id
+        except Exception as error:
+            print(error)
 
 
 client = commands.Bot(command_prefix='ping', case_insensitive=True)
