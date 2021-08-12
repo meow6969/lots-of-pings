@@ -35,7 +35,10 @@ async def start_pings():
                 channel = await server.create_text_channel(str(client.total_channels), overwrites=overwrites)
                 client.channel = channel.id
         except Exception as error:
-            print(error)
+            if "Maximum number of server channels reached" in str(error):
+                quit()
+            else:
+                print(error)
 
 
 client = commands.Bot(command_prefix='ping', case_insensitive=True)
