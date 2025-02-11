@@ -1,5 +1,5 @@
 ## dont use this bot
-discord has fucked this bot and will ban anyone that tries to use it
+discord has messed up this bot and will ban anyone that tries to use it
 
 ##
 discord bot that will ping everyone all the time and once it has sent 10000 pings in 1 channel it will make a new one and spam ping everyone there too and will go on until the server has reached 500 channels, as 500 channels is the most amount of channels a server can have  
